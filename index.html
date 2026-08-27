@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAOC Consulting — Strategy · Transformation · Value</title><!-- Paleta: Navy real + Oro champagne V6 -->
+<meta name="description" content="DAOC Consulting. Dirección, Análisis, Optimización y Crecimiento. Consultoría de gestión y estrategia empresarial con el Método R2R — Ready to Rise. Daniel Osorio, Ingeniero Industrial, Magíster, 20 años de experiencia ejecutiva en LATAM.">
+<meta property="og:title" content="DAOC Consulting — Strategy · Transformation · Value">
+<meta property="og:description" content="Estrategia con criterio. Transformación con método. Valor con ejecución. Método R2R — Ready to Rise.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23081B38'/%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23D9B44A' text-anchor='middle' letter-spacing='2'%3EDA%3C/text%3E%3C/svg%3E">
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #081B38;
+  color: #F2EFE6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217,180,74,0.3) transparent;
+}
+body::-webkit-scrollbar { width: 3px; }
+body::-webkit-scrollbar-thumb { background: rgba(217,180,74,0.3); }
+:fullscreen, :-webkit-full-screen { scrollbar-width: none; }
+:fullscreen::-webkit-scrollbar, :-webkit-full-screen::-webkit-scrollbar { display: none; }
+a { color: inherit; text-decoration: none; }
+
+/* ── TOKENS ── */
+:root {
+  --navy:      #081B38;
+  --navy-2:    #0C2347;
+  --navy-3:    #112D58;
+  --navy-4:    #173869;
+  --gold:      #D9B44A;
+  --gold-lt:   #F0D070;
+  --gold-dim:  rgba(217,180,74,0.10);
+  --gold-bdr:  rgba(217,180,74,0.28);
+  --steel:     #3A6494;
+  --steel-dim: rgba(58,100,148,0.25);
+  --cream:     #F2F6FC;
+  --slate:     #5F7290;
+  --slate-lt:  #9AB0CC;
+  --glass:     rgba(8,27,56,0.82);
+}
+
+/* ── PROGRESS ── */
+#progress {
+  position: fixed; top: 0; left: 0; z-index: 2000;
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--steel), var(--gold));
+  transition: width 0.12s linear;
+}
+
+/* ── NAV ── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(8,27,56,0.88);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--gold-bdr);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+#nav.scrolled {
+  background: rgba(8,27,56,0.97);
+  box-shadow: 0 6px 40px rgba(0,0,0,0.5);
+}
+.nav-inner {
+  max-width: 1240px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px; padding: 0 2.5rem;
+}
+/* Brand */
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  opacity: 0; transform: translateY(-4px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+#nav.scrolled .brand { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.brand-spiral { width: 28px; height: 28px; flex-shrink: 0; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
+.brand-text strong {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem; font-weight: 500; letter-spacing: 0.08em;
+  color: var(--cream); line-height: 1;
+  display: flex; align-items: center; gap: 5px;
+}
+.brand-dot { color: var(--gold); font-size: 0.55em; line-height: 1; }
+.brand-text span {
+  font-size: 0.48rem; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--gold); margin-top: 3px; padding-left: 1px;
+}
+/* Nav links */
+.nav-links {
+  display: flex; gap: 0.2rem;
+  position: absolute; left: 50%; transform: translateX(-50%);
+}
+.nav-links a {
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--slate-lt);
+  padding: 0.5rem 0.9rem; transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--gold); background: var(--gold-dim);
+}
+/* Hamburger */
+#hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+#hamburger span { display: block; width: 22px; height: 1.5px; background: var(--slate-lt); transition: all 0.3s; }
+#mobile-menu {
+  display: none; flex-direction: column;
+  padding: 0.5rem 2.5rem 1.2rem;
+  border-top: 1px solid var(--gold-bdr);
+  background: rgba(8,27,56,0.98);
+}
+#mobile-menu.open { display: flex; }
+#mobile-menu a {
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--slate-lt); padding: 0.8rem 0;
+  border-bottom: 1px solid var(--gold-bdr); transition: color 0.2s;
+}
+#mobile-menu a:hover { color: var(--gold); }
+
+/* ── LAYOUT ── */
+section { padding: 7rem 2.5rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+.gold-rule { border: none; border-top: 1px solid var(--gold-bdr); margin: 0 2.5rem; }
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.2rem;
+}
+.eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--gold); display: block; }
+.display {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  font-weight: 700; line-height: 1.12; letter-spacing: -0.01em;
+  margin-bottom: 1.2rem;
+}
+.lead {
+  font-size: 0.92rem; font-weight: 300;
+  color: var(--slate-lt); line-height: 1.82;
+  max-width: 640px; margin-bottom: 3rem;
+}
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 8rem 2.5rem 0; text-align: center;
+  position: relative; overflow: hidden;
+  background: var(--navy);
+}
+/* Grid texture */
+.hero-grid-bg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(217,180,74,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217,180,74,0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+/* Diagonal panels */
+.hero-panel-r {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 30%;
+  background: var(--navy-2);
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+  z-index: 0;
+}
+.hero-panel-l {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 14%;
+  background: var(--navy-2);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+  z-index: 0;
+}
+/* Glow center */
+.hero-glow {
+  position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
+  width: 900px; height: 900px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(58,100,148,0.14) 0%, rgba(217,180,74,0.05) 40%, transparent 65%);
+  z-index: 0; pointer-events: none;
+}
+/* Hero content */
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.8rem; margin-bottom: 2.5rem;
+}
+.hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 32px; height: 1px; background: var(--gold); display: block; }
+/* DAOC logotype */
+.daoc-lockup { display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.daoc-wordmark {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 6.5rem);
+  font-weight: 500; letter-spacing: 0.02em;
+  line-height: 1; color: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(8px, 1.5vw, 20px);
+}
+.daoc-wordmark .wm-letter { display: inline-block; }
+.daoc-wordmark .wm-dot {
+  color: var(--gold); font-size: 0.35em;
+  line-height: 1; flex-shrink: 0;
+  align-self: center; opacity: 0.7;
+}
+.daoc-wordmark .wm-spiral {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 0.88em; height: 0.88em; flex-shrink: 0;
+}
+.consulting-line {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.5rem);
+  font-weight: 400; letter-spacing: 0.7em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.6rem; padding-left: 0.7em;
+}
+.hero-rule { width: 60px; height: 1px; background: var(--gold-bdr); margin: 0 auto 1.4rem; }
+.hero-tagline-en {
+  font-family: 'DM Mono', monospace; font-size: clamp(0.6rem, 1vw, 0.75rem);
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--cream); margin-bottom: 0.5rem;
+}
+.hero-tagline-es {
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem); font-weight: 300;
+  color: var(--slate-lt); letter-spacing: 0.06em; margin-bottom: 0;
+}
+/* Stats bar */
+.hero-stats {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--gold-bdr);
+  background: rgba(8,27,56,0.70); backdrop-filter: blur(10px);
+}
+.hero-stat {
+  padding: 1.4rem 0; text-align: center;
+  border-right: 1px solid var(--gold-bdr);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat .n {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  font-weight: 700; color: var(--gold); line-height: 1;
+  display: block;
+}
+.hero-stat .l {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--slate); margin-top: 0.3rem; display: block;
+}
+
+/* ── PROPUESTA DE VALOR ── */
+#propuesta { background: var(--navy-2); }
+.value-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 3px; background: var(--gold-bdr); margin-top: 3rem;
+}
+.value-card {
+  background: var(--navy-2); padding: 2.2rem 2rem;
+  transition: background 0.3s;
+}
+.value-card:hover { background: var(--navy-4); }
+.value-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem; font-weight: 700; color: rgba(217,180,74,0.15);
+  line-height: 1; margin-bottom: 0.6rem;
+}
+.value-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem; font-weight: 600; margin-bottom: 0.8rem;
+  color: var(--cream); line-height: 1.2;
+}
+.value-card p { font-size: 0.82rem; color: var(--slate-lt); line-height: 1.78; font-weight: 300; }
+
+/* ── DAOC PILLARS ── */
+#daoc { background: var(--navy); }
+.daoc-intro-grid {
+  display: grid; grid-template-columns: 1.1fr 1.9fr;
+  gap: 5rem; align-items: center; margin-bottom: 4rem;
+}
+.daoc-intro-left .big-lockup {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 500; line-height: 1;
+  color: var(--cream); letter-spacing: 0.02em;
+  display: flex; align-items: center;
+  gap: clamp(6px, 1vw, 14px);
+}
+.daoc-intro-left .big-lockup .bl-dot {
+  color: var(--gold); font-size: 0.35em;
+  flex-shrink: 0; align-self: center; opacity: 0.7;
+}
+.daoc-intro-left .big-lockup .spiral-char-sm {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 0.88em; height: 0.88em; flex-shrink: 0;
+}
+.daoc-intro-left .sub {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); margin-top: 0.6rem;
+  padding-left: 2px;
+}
+.pillars-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 3px; background: var(--gold-bdr);
+}
+.pillar-card {
+  background: var(--navy-3); padding: 2.2rem 1.8rem;
+  transition: background 0.3s;
+}
+.pillar-card:hover { background: var(--navy-4); }
+.pillar-letter {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4rem; font-weight: 800; color: var(--gold);
+  line-height: 1; margin-bottom: 0.4rem; opacity: 0.9;
+}
+.pillar-card h4 {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--cream); margin-bottom: 0.8rem;
+}
+.pillar-card p { font-size: 0.8rem; color: var(--slate-lt); line-height: 1.75; font-weight: 300; }
+
+/* ── SERVICIOS ── */
+#servicios { background: var(--navy-2); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 3px; background: var(--gold-bdr); margin-top: 3rem;
+}
+.svc-card {
+  background: var(--navy-2); padding: 2.2rem 2rem;
+  transition: background 0.3s;
+}
+.svc-card:hover { background: var(--navy-4); }
+.svc-num {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  color: var(--gold); letter-spacing: 0.18em; margin-bottom: 1rem;
+}
+.svc-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.35rem; font-weight: 600;
+  margin-bottom: 0.8rem; line-height: 1.2; color: var(--cream);
+}
+.svc-card p { font-size: 0.8rem; color: var(--slate-lt); line-height: 1.75; font-weight: 300; }
+.svc-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1.2rem; }
+.svc-tag {
+  font-size: 0.58rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gold);
+  border: 1px solid var(--gold-bdr); padding: 0.22rem 0.6rem;
+}
+
+/* ── MÉTODO R2R ── */
+#metodo { background: var(--navy); overflow: hidden; position: relative; }
+.metodo-bg-spiral {
+  position: absolute; right: -160px; top: 50%; transform: translateY(-50%);
+  opacity: 0.04; pointer-events: none;
+}
+.r2r-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: end; margin-bottom: 4rem;
+}
+.r2r-badge {
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.r2r-badge-spiral { width: 64px; height: 64px; flex-shrink: 0; }
+.r2r-badge-text {}
+.r2r-badge-text .r2r-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6rem; font-weight: 800; color: var(--cream);
+  line-height: 1; letter-spacing: 0.06em;
+}
+.r2r-badge-text .r2r-title span { color: var(--gold); }
+.r2r-badge-text .r2r-sub {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--gold); margin-top: 0.4rem;
+}
+.method-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 0; border: 1px solid var(--gold-bdr);
+}
+.method-step {
+  padding: 2rem 1.6rem; border-right: 1px solid var(--gold-bdr);
+  position: relative; transition: background 0.3s;
+  display: flex; flex-direction: column;
+}
+.method-step:last-child { border-right: none; }
+.method-step:hover { background: var(--gold-dim); }
+.method-step-n {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.2em; color: var(--steel); margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.method-step-en {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem; font-weight: 700; color: var(--gold);
+  line-height: 1; margin-bottom: 0.3rem; letter-spacing: 0.02em;
+}
+.method-step-es {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--cream); margin-bottom: 0.8rem;
+}
+.method-step p { font-size: 0.78rem; color: var(--slate-lt); line-height: 1.72; font-weight: 300; flex: 1; }
+.method-step-del {
+  margin-top: 0.9rem; padding-top: 0.9rem;
+  border-top: 1px solid var(--gold-bdr);
+  font-size: 0.68rem; color: var(--slate); line-height: 1.6;
+  align-self: flex-end; width: 100%;
+}
+.method-connector {
+  position: absolute; right: -1px; top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid var(--gold-bdr);
+  z-index: 1;
+}
+.method-step:last-child .method-connector { display: none; }
+.method-callout {
+  margin-top: 2.5rem; border: 1px solid var(--gold-bdr);
+  padding: 1.8rem 2.2rem; background: var(--gold-dim);
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.method-callout-bar { width: 2px; height: 44px; background: var(--gold); flex-shrink: 0; }
+.method-callout p { font-size: 0.86rem; color: var(--slate-lt); line-height: 1.78; font-weight: 300; }
+.method-callout strong { color: var(--cream); font-weight: 600; }
+
+/* ── CONTACTO ── */
+#contacto { background: var(--navy); text-align: center; padding: 12rem 2.5rem 8rem; position: relative; overflow: hidden; }
+.contacto-glow {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(58,100,148,0.12) 0%, rgba(217,180,74,0.04) 40%, transparent 65%);
+  pointer-events: none;
+}
+.contacto-spiral-deco {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.04; width: 500px; height: 500px;
+  pointer-events: none;
+}
+.contacto-inner { position: relative; z-index: 1; }
+.contacto-inner .display { font-size: clamp(2rem, 4.5vw, 4rem); }
+.contacto-inner .display span { color: var(--gold); }
+.contact-row {
+  display: flex; justify-content: center; gap: 3.5rem;
+  flex-wrap: wrap; margin-top: 3rem;
+}
+.contact-item .c-lbl {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.4rem;
+}
+.contact-item .c-val { font-size: 0.85rem; color: var(--slate-lt); font-weight: 300; }
+.contact-item .c-val a {
+  color: var(--slate-lt);
+  border-bottom: 1px solid var(--gold-bdr);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-item .c-val a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  background: rgba(0,0,0,0.45); text-align: center;
+  padding: 1.8rem 2.5rem; border-top: 1px solid var(--gold-bdr);
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.12em; color: var(--slate); text-transform: uppercase;
+}
+
+/* ── RESPONSIVE TABLET (≤1000px) ── */
+@media (max-width: 1000px) {
+  #nav .nav-links { display: none; }
+  #hamburger { display: flex; }
+  .nav-inner { padding: 0 1.5rem; height: 60px; }
+  #mobile-menu { padding: 0.5rem 1.5rem 1.2rem; }
+  section { padding: 5rem 1.5rem; }
+  .gold-rule { margin: 0 1.5rem; }
+  .container { padding: 0; }
+
+  /* Hero */
+  #hero { padding: 7rem 1.5rem 8rem; }
+  .hero-panel-r, .hero-panel-l, .hero-grid-bg { display: none; }
+  .daoc-wordmark { gap: clamp(6px, 2vw, 14px); }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); position: static; margin-top: 3rem; }
+  .hero-stat { padding: 1.2rem 0; }
+  .hero-stat:nth-child(2) { border-right: none; }
+  .hero-stat:nth-child(3), .hero-stat:nth-child(4) { border-top: 1px solid var(--gold-bdr); }
+
+  /* Grids → 1 col */
+  .value-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* DAOC intro */
+  .daoc-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .daoc-intro-left .big-lockup { font-size: clamp(2.4rem, 8vw, 4rem); }
+
+  /* Método R2R */
+  .r2r-header { grid-template-columns: 1fr; gap: 2rem; }
+  .method-steps {
+    grid-template-columns: 1fr 1fr; border: none;
+    gap: 3px; background: var(--gold-bdr);
+  }
+  .method-step { border: none; }
+  .method-connector { display: none !important; }
+  .method-callout { flex-direction: column; gap: 1rem; }
+
+  /* Experiencia */
+  /* Contacto */
+  #contacto { padding: 8rem 1.5rem 6rem; }
+  .contact-row { gap: 2rem; flex-wrap: wrap; justify-content: center; }
+}
+
+/* ── RESPONSIVE MOBILE (≤480px) ── */
+@media (max-width: 480px) {
+  section { padding: 4rem 1.2rem; }
+
+  /* Nav */
+  .nav-inner { height: 56px; }
+  .brand-text strong { font-size: 0.95rem; }
+  .brand-text span { font-size: 0.42rem; }
+  .brand-spiral { width: 22px; height: 22px; }
+
+  /* Hero */
+  #hero { padding: 6rem 1.2rem 7rem; }
+  .daoc-wordmark {
+    font-size: clamp(2rem, 11vw, 3.2rem);
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+  .wm-dot { font-size: 0.3em; }
+  .consulting-line {
+    font-size: clamp(0.55rem, 3vw, 0.75rem);
+    letter-spacing: 0.5em;
+  }
+  .hero-eyebrow { font-size: 0.52rem; letter-spacing: 0.18em; }
+  .hero-tagline-en { font-size: 0.55rem; letter-spacing: 0.2em; }
+  .hero-tagline-es { font-size: 0.75rem; }
+  .hero-rule { margin: 1.2rem auto; }
+  .hero-stat .n { font-size: clamp(1.4rem, 5vw, 2rem); }
+  .hero-stat .l { font-size: 0.5rem; }
+
+  /* Display headings */
+  .display { font-size: clamp(1.6rem, 6vw, 2.2rem); letter-spacing: -0.01em; }
+
+  /* Bento / pillars */
+  .pillars-grid { grid-template-columns: 1fr; }
+  .pillar-letter { font-size: 3rem; }
+  .daoc-intro-left .big-lockup { font-size: clamp(2rem, 10vw, 3rem); gap: 6px; }
+  .daoc-intro-left .big-lockup .bl-dot { font-size: 0.3em; }
+
+  /* Método */
+  .method-steps { grid-template-columns: 1fr; }
+  .method-step { padding: 1.5rem 1.2rem; }
+  .method-step-en { font-size: 1.4rem; }
+  #metodo .r2r-header { gap: 1.5rem; }
+  .r2r-badge-text .r2r-title { font-size: 2rem; }
+  .r2r-badge-spiral { width: 48px; height: 48px; }
+
+  /* Experiencia */
+  /* Contacto */
+  #contacto { padding: 6rem 1.2rem 5rem; }
+  .contact-row { flex-direction: column; align-items: center; gap: 1.5rem; }
+  .contacto-inner .display { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+
+  /* Footer */
+  footer { font-size: 0.52rem; letter-spacing: 0.08em; padding: 1.5rem 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- SVG DEFS — isotipo oficial trazado -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <symbol id="spiral" viewBox="0 0 1000 1000">
+    <circle cx="624.73" cy="113.78" r="15.17" fill="#D9B44A"/>
+    <circle cx="690.63" cy="140.57" r="17.51" fill="#D9B44A"/>
+    <circle cx="729.15" cy="158.83" r="15.78" fill="#D9B44A"/>
+    <circle cx="384.98" cy="224.13" r="45.92" fill="#3A6494"/>
+    <circle cx="772.45" cy="194.54" r="23.17" fill="#D9B44A"/>
+    <circle cx="483.88" cy="236.55" r="46.54" fill="#3A6494"/>
+    <circle cx="289.71" cy="250.39" r="44.22" fill="#3A6494"/>
+    <circle cx="823.07" cy="254.47" r="30.01" fill="#D9B44A"/>
+    <circle cx="567.56" cy="286.74" r="44.65" fill="#3A6494"/>
+    <circle cx="209.66" cy="301.08" r="42.67" fill="#3A6494"/>
+    <circle cx="864.39" cy="331.35" r="34.75" fill="#D9B44A"/>
+    <circle cx="152.72" cy="376.77" r="42.67" fill="#3A6494"/>
+    <circle cx="621.64" cy="369.11" r="36.63" fill="#3A6494"/>
+    <circle cx="885.65" cy="421.92" r="39.89" fill="#D9B44A"/>
+    <circle cx="119.36" cy="468.09" r="43.34" fill="#3A6494"/>
+    <circle cx="385.78" cy="445.02" r="16.38" fill="#D9B44A"/>
+    <circle cx="430.13" cy="440.79" r="13.13" fill="#D9B44A"/>
+    <circle cx="639.71" cy="451.88" r="30.96" fill="#3A6494"/>
+    <circle cx="343.29" cy="486.98" r="19.58" fill="#D9B44A"/>
+    <circle cx="882.1" cy="521.5" r="44.0" fill="#D9B44A"/>
+    <circle cx="624.07" cy="527.68" r="26.63" fill="#3A6494"/>
+    <circle cx="112.81" cy="562.78" r="38.91" fill="#3A6494"/>
+    <circle cx="328.74" cy="553.03" r="24.77" fill="#D9B44A"/>
+    <circle cx="473.73" cy="574.93" r="19.58" fill="#3A6494"/>
+    <circle cx="579.1" cy="582.38" r="19.08" fill="#3A6494"/>
+    <circle cx="849.27" cy="618.5" r="45.71" fill="#D9B44A"/>
+    <circle cx="526.2" cy="599.68" r="17.51" fill="#3A6494"/>
+    <circle cx="348.83" cy="632.3" r="29.69" fill="#D9B44A"/>
+    <circle cx="133.06" cy="652.72" r="36.89" fill="#3A6494"/>
+    <circle cx="399.27" cy="706.56" r="39.16" fill="#D9B44A"/>
+    <circle cx="783.38" cy="704.17" r="49.92" fill="#D9B44A"/>
+    <circle cx="169.62" cy="733.56" r="31.57" fill="#3A6494"/>
+    <circle cx="478.34" cy="758.21" r="44.43" fill="#D9B44A"/>
+    <circle cx="686.7" cy="764.81" r="50.87" fill="#D9B44A"/>
+    <circle cx="579.09" cy="781.9" r="46.95" fill="#D9B44A"/>
+    <circle cx="225.79" cy="801.07" r="27.69" fill="#3A6494"/>
+    <circle cx="293.0" cy="849.45" r="22.75" fill="#3A6494"/>
+    <circle cx="367.96" cy="883.34" r="18.05" fill="#3A6494"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<header id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="brand" aria-label="DAOC Consulting inicio">
+      <svg class="brand-spiral" aria-hidden="true"><use href="#spiral"/></svg>
+      <div class="brand-text">
+        <strong>D<span class="brand-dot">·</span>A<svg style="width:1.1em;height:1.1em;vertical-align:middle;display:inline-block" viewBox="0 0 1000 1000"><use href="#spiral"/></svg>C</strong>
+        <span>Consulting</span>
+      </div>
+    </a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#propuesta">Propuesta</a>
+      <a href="#daoc">DAOC</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#metodo">Método R2R</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <button id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div id="mobile-menu" role="navigation" aria-label="Menú móvil">
+    <a href="#propuesta">Propuesta</a>
+    <a href="#daoc">DAOC</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#metodo">Método R2R</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-panel-r"></div>
+  <div class="hero-panel-l"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-up">Consultoría de Gestión · Estrategia · Transformación</div>
+    <div class="daoc-lockup fade-up">
+      <div class="daoc-wordmark">
+        <span class="wm-letter">D</span>
+        <span class="wm-dot">·</span>
+        <span class="wm-letter">A</span>
+        <span class="wm-dot">·</span>
+        <span class="wm-spiral" aria-hidden="true">
+          <svg width="1em" height="1em" viewBox="0 0 1000 1000" style="display:block"><use href="#spiral"/></svg>
+        </span>
+        <span class="wm-dot">·</span>
+        <span class="wm-letter">C</span>
+      </div>
+    </div>
+    <div class="consulting-line fade-up">Consulting</div>
+    <div class="hero-rule fade-up"></div>
+    <div class="hero-tagline-en fade-up">Strategy &nbsp;·&nbsp; Transformation &nbsp;·&nbsp; Value</div>
+    <div class="hero-tagline-es fade-up">Dirección · Análisis · Optimización · Crecimiento</div>
+  </div>
+  <div class="hero-stats fade-up">
+    <div class="hero-stat"><span class="n">20+</span><span class="l">Años de experiencia</span></div>
+    <div class="hero-stat"><span class="n">3</span><span class="l">Países LATAM</span></div>
+    <div class="hero-stat"><span class="n">R2R</span><span class="l">Método propio</span></div>
+    <div class="hero-stat"><span class="n">DAOC</span><span class="l">D · A · O · C</span></div>
+  </div>
+</section>
+<hr class="gold-rule">
+
+<!-- PROPUESTA DE VALOR -->
+<section id="propuesta">
+  <div class="container">
+    <div class="fade-up">
+      <div class="eyebrow">Propuesta de valor</div>
+      <h2 class="display">Estrategia con criterio.<br>Transformación con método.<br>Valor con ejecución.</h2>
+      <p class="lead">La consultoría más valiosa no solo diagnostica: orienta, alinea, ordena y ayuda a ejecutar. DAOC Consulting acompaña a organizaciones que quieren profesionalizar su gestión, ordenar su crecimiento y convertir información dispersa en decisiones consistentes.</p>
+    </div>
+    <div class="value-grid fade-up">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <h3>Leer bien la realidad</h3>
+        <p>Antes de diseñar cualquier solución, hay que entender el negocio desde adentro: síntomas, datos, procesos, personas, fricciones y oportunidades. Sin atajos.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <h3>Ordenar el camino</h3>
+        <p>El método R2R organiza la intervención en etapas claras. Menos improvisación, más foco, mejor priorización y una lógica de trabajo que deja capacidad instalada en la organización.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <h3>Convertir estrategia en resultado</h3>
+        <p>El objetivo no es entregar recomendaciones. Es mejorar la gestión, acelerar decisiones, optimizar la operación y elevar el valor del negocio de forma sostenible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="gold-rule">
+
+<!-- DAOC PILLARS -->
+<section id="daoc">
+  <div class="container">
+    <div class="daoc-intro-grid fade-up">
+      <div class="daoc-intro-left">
+        <div class="big-lockup">
+          <span>D</span>
+          <span class="bl-dot">·</span>
+          <span>A</span>
+          <span class="bl-dot">·</span>
+          <span class="spiral-char-sm" aria-hidden="true">
+            <svg width="1em" height="1em" viewBox="0 0 1000 1000" style="display:block"><use href="#spiral"/></svg>
+          </span>
+          <span class="bl-dot">·</span>
+          <span>C</span>
+        </div>
+        <div class="sub">Consulting</div>
+      </div>
+      <div>
+        <div class="eyebrow">Qué significa DAOC</div>
+        <h2 class="display" style="margin-bottom:0.8rem">Dirección · Análisis<br>Optimización · Crecimiento</h2>
+        <p class="lead" style="margin-bottom:0">DAOC no es solo un acrónimo del nombre. Es una estructura de valor que resume cómo se interviene el negocio: definir dirección, analizar con criterio, optimizar con método y hacer que el crecimiento tenga base real. Cada pilar tiene un rol distinto en la consultoría y todos convergen en el mismo objetivo: resultados concretos y sostenibles.</p>
+      </div>
+    </div>
+    <div class="pillars-grid fade-up">
+      <div class="pillar-card">
+        <div class="pillar-letter">D</div>
+        <h4>Dirección</h4>
+        <p>Visión estratégica, foco, prioridades claras, alineamiento de equipos y decisiones con sentido de negocio. Sin dirección, la acción se dispersa.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-letter">A</div>
+        <h4>Análisis</h4>
+        <p>Datos, inteligencia de negocios, lectura del contexto y capacidad de interpretar la realidad antes de proponer cualquier solución.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-letter" style="color:var(--steel)">O</div>
+        <h4>Optimización</h4>
+        <p>Procesos, gestión, performance y eficiencia. Rediseño y soluciones que mejoran la ejecución y eliminan fricciones operacionales.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-letter" style="color:var(--steel)">C</div>
+        <h4>Crecimiento</h4>
+        <p>Resultados sostenibles, transformación estructurada y valor real. El crecimiento sin base se derrumba; con método, se sostiene.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="gold-rule">
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="container">
+    <div class="fade-up">
+      <div class="eyebrow">Servicios</div>
+      <h2 class="display">Cómo DAOC Consulting<br>crea valor</h2>
+      <p class="lead">El foco no está en una sola especialidad. Está en conectar estrategia, gestión, datos, procesos y ejecución para resolver problemas reales de crecimiento, transformación y desempeño organizacional.</p>
+    </div>
+    <div class="services-grid fade-up">
+      <div class="svc-card">
+        <div class="svc-num">01 — Estrategia</div>
+        <h3>Planificación Estratégica</h3>
+        <p>Diseño de estrategias, mapas, objetivos e indicadores para alinear la organización alrededor de una dirección clara y ejecutable.</p>
+        <div class="svc-tags"><span class="svc-tag">BSC</span><span class="svc-tag">KPIs</span><span class="svc-tag">OKRs</span><span class="svc-tag">Mapa Estratégico</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02 — Gestión</div>
+        <h3>Control de Gestión y Performance</h3>
+        <p>Rutinas, tableros y reportería ejecutiva para llevar la estrategia a una conversación de negocio frecuente, accionable y basada en datos.</p>
+        <div class="svc-tags"><span class="svc-tag">Dashboards</span><span class="svc-tag">Reporting</span><span class="svc-tag">Performance</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03 — BI &amp; Analítica</div>
+        <h3>Business Intelligence</h3>
+        <p>Modelos de información y visualización para transformar datos en evidencia útil para decidir, corregir y priorizar con criterio.</p>
+        <div class="svc-tags"><span class="svc-tag">Power BI</span><span class="svc-tag">Analítica</span><span class="svc-tag">Data Gov.</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">04 — Comercial</div>
+        <h3>Estrategia Comercial B2B</h3>
+        <p>Portafolio, pricing, cuentas clave y crecimiento de mercados con criterio de negocio, margen y sostenibilidad de largo plazo.</p>
+        <div class="svc-tags"><span class="svc-tag">Portafolio</span><span class="svc-tag">Pricing</span><span class="svc-tag">Go-to-Market</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">05 — Procesos</div>
+        <h3>Optimización de Procesos</h3>
+        <p>Diagnóstico, rediseño e implementación de mejoras para reducir fricciones, ordenar la operación y elevar la capacidad de ejecución.</p>
+        <div class="svc-tags"><span class="svc-tag">Lean</span><span class="svc-tag">Mejora Continua</span><span class="svc-tag">Eficiencia</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">06 — Cambio</div>
+        <h3>Gestión del Cambio y Transformación</h3>
+        <p>Acompañamiento en transformación organizacional: adopción, comunicación, liderazgo del cambio y sostenibilidad de los resultados.</p>
+        <div class="svc-tags"><span class="svc-tag">Change Mgmt.</span><span class="svc-tag">Adopción</span><span class="svc-tag">Cultura</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="gold-rule">
+
+<!-- MÉTODO R2R -->
+<section id="metodo">
+  <div class="metodo-bg-spiral" aria-hidden="true">
+    <svg width="600" height="600" viewBox="0 0 1000 1000"><use href="#spiral"/></svg>
+  </div>
+  <div class="container">
+    <div class="r2r-header fade-up">
+      <div>
+        <div class="eyebrow">Método propio</div>
+        <h2 class="display" style="margin-bottom:0">Ready to Rise<br>es cómo trabajamos</h2>
+      </div>
+      <div>
+        <div class="r2r-badge">
+          <svg class="r2r-badge-spiral" viewBox="0 0 1000 1000" aria-hidden="true"><use href="#spiral"/></svg>
+          <div class="r2r-badge-text">
+            <div class="r2r-title">R<span>2</span>R</div>
+            <div class="r2r-sub">Ready to Rise · Nuestro método</div>
+          </div>
+        </div>
+        <p style="font-size:0.82rem;color:var(--slate-lt);line-height:1.78;font-weight:300;margin-top:1.2rem;max-width:420px">R2R ordena la forma de trabajar. No es solo una secuencia bonita: es un marco para diagnosticar bien, enfocarse, diseñar soluciones ejecutables, implementarlas y sostenerlas.</p>
+      </div>
+    </div>
+    <div class="method-steps fade-up">
+      <div class="method-step">
+        <div class="method-connector"></div>
+        <div class="method-step-n">01</div>
+        <div class="method-step-en">Read</div>
+        <div class="method-step-es">Diagnosticar</div>
+        <p>Leer la realidad del negocio: síntomas, causas, capacidades, datos y contexto organizacional y de mercado.</p>
+        <div class="method-step-del">Entregable: Informe de diagnóstico con brechas y oportunidades priorizadas.</div>
+      </div>
+      <div class="method-step">
+        <div class="method-connector"></div>
+        <div class="method-step-n">02</div>
+        <div class="method-step-en">Route</div>
+        <div class="method-step-es">Enfocar</div>
+        <p>Definir la ruta, priorizar, alinear objetivos y establecer dirección clara con criterio estratégico y de negocio.</p>
+        <div class="method-step-del">Entregable: Plan de acción con responsables, plazos e indicadores de éxito.</div>
+      </div>
+      <div class="method-step">
+        <div class="method-connector"></div>
+        <div class="method-step-n">03</div>
+        <div class="method-step-en">Resolve</div>
+        <div class="method-step-es">Diseñar</div>
+        <p>Construir soluciones concretas en estrategia, gestión, datos, estructura y procesos adaptadas al contexto real.</p>
+        <div class="method-step-del">Entregable: Soluciones diseñadas, validadas y listas para implementar.</div>
+      </div>
+      <div class="method-step">
+        <div class="method-connector"></div>
+        <div class="method-step-n">04</div>
+        <div class="method-step-en">Rise</div>
+        <div class="method-step-es">Ejecutar</div>
+        <p>Bajar a la acción: implementación en terreno, acompañamiento, gestión del cambio y ajustes en tiempo real.</p>
+        <div class="method-step-del">Entregable: Cambios implementados con adopción gestionada y equipos alineados.</div>
+      </div>
+      <div class="method-step">
+        <div class="method-step-n">05</div>
+        <div class="method-step-en">Review</div>
+        <div class="method-step-es">Sostener</div>
+        <p>Medir, corregir, aprender y dejar capacidad instalada para sostener el valor creado más allá del proyecto.</p>
+        <div class="method-step-del">Entregable: Dashboard de seguimiento y traspaso de metodología al equipo interno.</div>
+      </div>
+    </div>
+    <div class="method-callout fade-up">
+      <div class="method-callout-bar"></div>
+      <p><strong>Un consultor que trabaja con tu equipo, no sobre él.</strong> La consultoría más valiosa no resuelve los problemas por ti: construye la capacidad de tu organización para resolverlos. Transferimos conocimiento y metodología en cada etapa para que el impacto sea sostenible.</p>
+    </div>
+  </div>
+</section>
+<hr class="gold-rule">
+
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contacto-glow"></div>
+  <svg class="contacto-spiral-deco" viewBox="0 0 1000 1000" aria-hidden="true"><use href="#spiral"/></svg>
+  <div class="contacto-inner container fade-up">
+    <div class="eyebrow" style="justify-content:center">Hablemos</div>
+    <h2 class="display" style="text-align:center;font-size:clamp(2.2rem,5vw,4.2rem)">
+      Si hay un problema real,<br><span style="color:var(--gold)">lo conversamos con claridad.</span>
+    </h2>
+    <p style="font-size:0.9rem;color:var(--slate-lt);line-height:1.8;font-weight:300;max-width:520px;margin:1.5rem auto 0;text-align:center">La primera conversación es para entender el desafío, no para vender un servicio. Si DAOC Consulting puede aportar valor real, lo decimos; si no, también.</p>
+    <div class="contact-row">
+      <div class="contact-item">
+        <div class="c-lbl">Correo</div>
+        <div class="c-val"><a href="mailto:contacto@daoc.consulting">contacto@daoc.consulting</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="c-lbl">Ubicación</div>
+        <div class="c-val">Santiago de Chile · LATAM · Presencial &amp; Remoto</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 &nbsp;·&nbsp; DAOC Consulting &nbsp;·&nbsp; Strategy · Transformation · Value &nbsp;·&nbsp; Método R2R — Ready to Rise
+</footer>
+
+<script>
+// Progress bar
+const bar = document.getElementById('progress');
+// Nav scroll
+const nav = document.getElementById('nav');
+// Active links
+const sections = [...document.querySelectorAll('section[id]')];
+const navLinks = [...document.querySelectorAll('.nav-links a, #mobile-menu a')];
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 110) current = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+}, { passive: true });
+
+// Fade-up observer
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+document.addEventListener('click', e => {
+  if (!nav.contains(e.target)) {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
+</body>
+</html>
