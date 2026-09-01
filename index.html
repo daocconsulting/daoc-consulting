@@ -781,6 +781,93 @@ footer {
   .hero-spiral-left, .hero-spiral-right { animation: none; }
 }
 
+
+/* ── MODAL POLÍTICA DE PRIVACIDAD ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(5,12,26,0.88); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--navy-2); border: 1px solid var(--gold-bdr);
+  max-width: 560px; width: 100%; padding: 2.5rem;
+  position: relative; max-height: 80vh; overflow-y: auto;
+}
+.modal-box h3 {
+  font-family: 'Montserrat', sans-serif; font-size: 1rem;
+  font-weight: 700; color: var(--cream); margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+.modal-box .modal-subtitle {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.4rem;
+}
+.modal-box p {
+  font-size: 0.84rem; color: var(--slate-lt); line-height: 1.78;
+  margin-bottom: 1rem; font-weight: 300;
+}
+.modal-box p:last-of-type { margin-bottom: 1.5rem; }
+.modal-rule { height: 1px; background: var(--gold-bdr); margin: 1.2rem 0; }
+.modal-close-btn {
+  background: var(--gold); color: var(--navy); border: none;
+  padding: 0.7rem 2rem; font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; font-family: 'Montserrat', sans-serif;
+  transition: background 0.2s; display: block; width: 100%;
+}
+.modal-close-btn:hover { background: var(--gold-lt); }
+.modal-x {
+  position: absolute; top: 1rem; right: 1.2rem;
+  background: none; border: none; color: var(--slate);
+  font-size: 1.2rem; cursor: pointer; line-height: 1;
+  transition: color 0.2s;
+}
+.modal-x:hover { color: var(--gold); }
+
+
+/* ── MODAL POLÍTICA DE PRIVACIDAD ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(5,12,26,0.88); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--navy-2); border: 1px solid var(--gold-bdr);
+  max-width: 560px; width: 100%; padding: 2.5rem;
+  position: relative; max-height: 80vh; overflow-y: auto;
+}
+.modal-box h3 {
+  font-family: 'Montserrat', sans-serif; font-size: 1rem;
+  font-weight: 700; color: var(--cream); margin-bottom: 0.4rem;
+}
+.modal-box .modal-subtitle {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.4rem;
+}
+.modal-box p {
+  font-size: 0.84rem; color: var(--slate-lt); line-height: 1.78;
+  margin-bottom: 1rem; font-weight: 300;
+}
+.modal-rule { height: 1px; background: var(--gold-bdr); margin: 1.2rem 0; }
+.modal-close-btn {
+  background: var(--gold); color: var(--navy); border: none;
+  padding: 0.7rem 2rem; font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; font-family: 'Montserrat', sans-serif;
+  display: block; width: 100%; transition: background 0.2s;
+}
+.modal-close-btn:hover { background: var(--gold-lt); }
+.modal-x {
+  position: absolute; top: 1rem; right: 1.2rem;
+  background: none; border: none; color: var(--slate);
+  font-size: 1.2rem; cursor: pointer; line-height: 1; transition: color 0.2s;
+}
+.modal-x:hover { color: var(--gold); }
+
 </style>
 
 <script type="application/ld+json">
@@ -1005,7 +1092,7 @@ footer {
     <div class="fade-up">
       <div class="eyebrow">Servicios</div>
       <h2 class="display">Cómo<br>creamos valor</h2>
-      <p class="lead">El valor no se declara, se percibe. Nuestro trabajo no termina cuando entregamos un informe; termina cuando el cliente nota la diferencia en sus decisiones, en su equipo y en sus resultados. Conectamos estrategia, datos, procesos y ejecución para que ese impacto sea real, medible y sostenible.</p>
+      <p class="lead">El valor no se declara — se percibe. Nuestro trabajo no termina cuando entregamos un informe; termina cuando el cliente nota la diferencia en sus decisiones, en su equipo y en sus resultados. Conectamos estrategia, datos, procesos y ejecución para que ese impacto sea real, medible y sostenible.</p>
     </div>
     <div class="services-grid fade-up">
       <div class="svc-card">
@@ -1133,7 +1220,7 @@ footer {
     <div class="contact-grid-new">
       <!-- FORMULARIO — Formspree -->
       <div class="contact-form-panel">
-        <h3>Cuéntame tu desafío</h3>
+        <h3>Cuéntanos tu desafío</h3>
         <p class="form-desc">Cuéntanos tu desafío y nos pondremos en contacto para construir juntos la mejor propuesta para tu organización.</p>
         <form action="https://formspree.io/f/mvkoooop" method="POST" id="contact-form">
           <input type="hidden" name="_subject" value="Nuevo mensaje desde daoc.consulting">
@@ -1189,7 +1276,7 @@ footer {
           <div id="form-success" style="display:none;margin-top:1rem;padding:1rem 1.2rem;border-left:3px solid var(--gold);background:var(--gold-dim);font-size:0.88rem;color:var(--cream);line-height:1.7">
             Gracias por tu mensaje, nos pondremos en contacto a la brevedad.<br>Saludos,<br><strong>Equipo DAOC Consulting</strong>
           </div>
-          <p class="form-note" style="margin-top:0.8rem">Al enviar este formulario aceptas la <a href="#">política de privacidad</a> de DAOC Consulting. Tu información no será compartida con terceros.</p>
+          <p class="form-note" style="margin-top:0.8rem">Al enviar este formulario aceptas la <a href="#" onclick="abrirModal();return false;" style="color:var(--gold);border-bottom:1px solid var(--gold-bdr)">política de privacidad</a> de DAOC Consulting. Tu información no será compartida con terceros.</p>
         </form>
       </div>
       <!-- INFO PANEL -->
@@ -1203,15 +1290,16 @@ footer {
               <div class="c-val"><a href="mailto:contacto@daoc.consulting" style="color:var(--slate-lt);border-bottom:1px solid var(--gold-bdr)">contacto@daoc.consulting</a></div>
             </div>
             <div class="contact-item">
-              <div class="c-lbl">te invitamos a seguirnos en nuestras redes sociales</div>
+              <div class="c-lbl">Redes Sociales</div>
               <div class="c-val"><a href="https://www.linkedin.com/company/daoc-consulting/" target="_blank" rel="noopener" style="color:var(--slate-lt);border-bottom:1px solid var(--gold-bdr)">linkedin.com/company/daoc-consulting</a></div>
             </div>
             <div class="contact-item">
               <div class="c-lbl">Ubicación</div>
-              <div class="c-val">Estamos en Santiago de Chile<br>puedes agendar Presencial y Remoto si eres de regiones o LATAM</div>
+              <div class="c-val">Santiago de Chile · LATAM<br>Presencial y Remoto</div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -1247,6 +1335,25 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 
+
+// ── MODAL PRIVACIDAD ──
+function abrirModal() {
+  document.getElementById('modal-privacidad').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function cerrarModal() {
+  document.getElementById('modal-privacidad').classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Cerrar al hacer clic fuera del modal
+document.getElementById('modal-privacidad').addEventListener('click', function(e) {
+  if (e.target === this) cerrarModal();
+});
+// Cerrar con Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') cerrarModal();
+});
+
 // ── FORMSPREE FORM SUBMISSION ──
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
@@ -1281,6 +1388,28 @@ if (contactForm) {
   });
 }
 
+
+// ── MODAL PRIVACIDAD ──
+function abrirModal() {
+  document.getElementById('modal-privacidad').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function cerrarModal() {
+  document.getElementById('modal-privacidad').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const overlay = document.getElementById('modal-privacidad');
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) cerrarModal();
+    });
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') cerrarModal();
+});
+
 // Hamburger
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -1301,5 +1430,39 @@ document.addEventListener('click', e => {
   }
 });
 </script>
+
+<!-- MODAL POLÍTICA DE PRIVACIDAD -->
+<div class="modal-overlay" id="modal-privacidad" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <button class="modal-x" onclick="cerrarModal()" aria-label="Cerrar">✕</button>
+    <h3 id="modal-title">Política de Privacidad</h3>
+    <div class="modal-subtitle">DAOC Consulting · daoc.consulting</div>
+    <div class="modal-rule"></div>
+    <p>Los datos personales que nos proporcionas a través del formulario de contacto — nombre, empresa, correo electrónico, teléfono y mensaje — son utilizados exclusivamente para responder tu consulta y, si corresponde, elaborar una propuesta de trabajo.</p>
+    <p>No compartimos, vendemos ni cedemos tu información a terceros bajo ninguna circunstancia. Los datos son almacenados de forma segura a través de Formspree y se eliminan una vez finalizado el proceso de contacto o a tu solicitud expresa.</p>
+    <p>Al enviar el formulario, aceptas que DAOC Consulting utilice tus datos con el único fin de establecer contacto profesional contigo.</p>
+    <p>Para ejercer tus derechos de acceso, rectificación o eliminación de datos, escríbenos a <a href="mailto:contacto@daoc.consulting" style="color:var(--gold);border-bottom:1px solid var(--gold-bdr)">contacto@daoc.consulting</a>.</p>
+    <div class="modal-rule"></div>
+    <button class="modal-close-btn" onclick="cerrarModal()">Entendido</button>
+  </div>
+</div>
+
+
+<!-- MODAL POLÍTICA DE PRIVACIDAD -->
+<div class="modal-overlay" id="modal-privacidad" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <button class="modal-x" onclick="cerrarModal()" aria-label="Cerrar">✕</button>
+    <h3 id="modal-title">Política de Privacidad</h3>
+    <div class="modal-subtitle">DAOC Consulting · daoc.consulting</div>
+    <div class="modal-rule"></div>
+    <p>Los datos personales que nos proporcionas a través del formulario de contacto — nombre, empresa, correo electrónico, teléfono y mensaje — son utilizados exclusivamente para responder tu consulta y, si corresponde, elaborar una propuesta de trabajo.</p>
+    <p>No compartimos, vendemos ni cedemos tu información a terceros bajo ninguna circunstancia. Los datos son almacenados de forma segura a través de Formspree y se eliminan una vez finalizado el proceso de contacto o a tu solicitud expresa.</p>
+    <p>Al enviar el formulario, aceptas que DAOC Consulting utilice tus datos con el único fin de establecer contacto profesional contigo.</p>
+    <p>Para ejercer tus derechos de acceso, rectificación o eliminación de datos, escríbenos a <a href="mailto:contacto@daoc.consulting" style="color:var(--gold);border-bottom:1px solid var(--gold-bdr)">contacto@daoc.consulting</a>.</p>
+    <div class="modal-rule"></div>
+    <button class="modal-close-btn" onclick="cerrarModal()">Entendido</button>
+  </div>
+</div>
+
 </body>
 </html>
